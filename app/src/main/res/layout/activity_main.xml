@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainViewModel"
+            type="com.example.neosofttask.view_model.MainActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            tools:layout_editor_absoluteX="-31dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvHeader"
+                    style="@style/TextViewHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register_page_header"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/tvProfilePic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/circular_image_view"
+                    android:src="@drawable/default_user_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHeader"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/circular_image_view_with_background"
+                    app:layout_constraintTop_toTopOf="@+id/tvProfilePic"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvProfilePic"
+                    app:layout_constraintStart_toEndOf="@+id/tvProfilePic"
+                    android:layout_marginStart="-10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:background="@drawable/circular_image_view_with_background"
+                    android:src="@drawable/baseline_edit_24"
+                    />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/edtTxtHeaderFirstName"
+                    style="@style/EditTextHeader"
+                    android:text="@string/register_page_edt_title_first_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvProfilePic" />
+
+                <EditText
+                    android:id="@+id/edtTxtFirstName"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/register_page_edt_hint_first_name"
+                    android:text="@={mainViewModel.firstName}"
+                    android:drawableLeft="@drawable/icon_person"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderFirstName" />
+
+                <TextView
+                    android:id="@+id/edtTxtHeaderLastName"
+                    style="@style/EditTextHeader"
+                    android:text="@string/register_page_edt_title_last_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtFirstName" />
+
+                <EditText
+                    android:id="@+id/edtTxtLastName"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/register_page_edt_hint_last_name"
+                    android:text="@={mainViewModel.lastName}"
+                    android:drawableLeft="@drawable/icon_person"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderLastName" />
+
+                <TextView
+                    android:id="@+id/edtTxtHeaderPhoneNo"
+                    style="@style/EditTextHeader"
+                    android:text="@string/register_page_edt_title_phone_number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtLastName" />
+
+                <EditText
+                    android:id="@+id/edtTxtPhoneNo"
+                    style="@style/EditTextStyleCustomInputType"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:hint="@string/register_page_edt_hint_phone_number"
+                    android:text="@={mainViewModel.phoneNumber}"
+                    android:drawableLeft="@drawable/icon_phone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderPhoneNo" />
+
+                <TextView
+                    android:id="@+id/edtTxtHeaderEmail"
+                    style="@style/EditTextHeader"
+                    android:text="@string/register_page_edt_title_email_id"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtPhoneNo" />
+
+                <EditText
+                    android:id="@+id/edtTxtEmail"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/register_page_edt_hint_email_id"
+                    android:text="@={mainViewModel.emailId}"
+                    android:drawableLeft="@drawable/icon_email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderEmail" />
+
+                <TextView
+                    android:id="@+id/tvRadioGroupTitle"
+                    style="@style/EditTextHeader"
+                    android:text="@string/register_page_radio_btn_title_gender"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edtTxtEmail" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvRadioGroupTitle">
+
+                    <RadioButton
+                        android:id="@+id/radioMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="@color/dark_blue"
+                        android:text="Male"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/radioFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:textColor="@color/black" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tvHeaderPassword"
+                    style="@style/EditTextHeader"
+                    android:text="@string/register_page_edt_title_password"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
+
+                <EditText
+                    android:id="@+id/edtTxtPassword"
+                    style="@style/EditTextStyleCustomInputType"
+                    android:hint="@string/register_page_edt_hint_password"
+                    android:text="@={mainViewModel.password}"
+                    android:inputType="textPassword"
+                    android:drawableLeft="@drawable/icon_lock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHeaderPassword"/>
+
+                <ImageView
+                    android:id="@+id/showPassword"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/hide_password"
+                    app:layout_constraintTop_toTopOf="@id/edtTxtPassword"
+                    app:layout_constraintBottom_toBottomOf="@id/edtTxtPassword"
+                    app:layout_constraintEnd_toEndOf="@id/edtTxtPassword"
+                    android:layout_marginRight="5dp" />
+
+                <ImageView
+                    android:id="@+id/hidePassword"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/view_password"
+                    app:layout_constraintTop_toTopOf="@id/edtTxtPassword"
+                    app:layout_constraintBottom_toBottomOf="@id/edtTxtPassword"
+                    app:layout_constraintEnd_toEndOf="@id/edtTxtPassword"
+                    android:layout_marginRight="5dp"
+                    android:visibility="gone"/>
+
+<!--                    android:drawableEnd="@drawable/hide_password"/>-->
+                <!--                    app:error="@{String.valueOf(mainViewModel.passwordErroMsg)}"/>-->
+
+                <TextView
+                    android:id="@+id/tvEdtTxtHeaderConfirmPass"
+                    style="@style/EditTextHeader"
+                    android:text="@string/register_page_edt_title_confirm_password"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtPassword" />
+
+                <EditText
+                    android:id="@+id/edtTxtConfirmPass"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/register_page_edt_hint_confirm_password"
+                    android:text="@={mainViewModel.confirmPassword}"
+                    android:drawableLeft="@drawable/icon_lock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEdtTxtHeaderConfirmPass" />
+
+                <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/button_background"
+                    android:onClick="@{()-> mainViewModel.validate()}"
+                    android:text="@string/button_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtConfirmPass" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

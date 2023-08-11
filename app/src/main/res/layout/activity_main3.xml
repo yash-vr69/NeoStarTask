@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="addressViewModel"
+            type="com.example.neosofttask.view_model.MainActivity3ViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity3">
+
+        <TextView
+            android:id="@+id/tvHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextViewHeader"
+            android:text="@string/address_page_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/addressEdtTxt"
+                style="@style/EditTextStyleAddressPage"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/address_page_edt_hint_address"
+                android:text="@={addressViewModel.address}"
+                android:drawableLeft="@drawable/business_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <EditText
+                android:id="@+id/landmarkEdtTxt"
+                style="@style/EditTextStyleAddressPage"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/address_page_edt_hint_landmark"
+                android:text="@={addressViewModel.landmark}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:drawableLeft="@drawable/business_24"/>
+
+            <EditText
+                android:id="@+id/cityEdtTxt"
+                style="@style/EditTextStyleAddressPage"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/address_page_edt_hint_city"
+                android:text="@={addressViewModel.city}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:drawableLeft="@drawable/business_24"/>
+
+            <RelativeLayout
+                android:id="@+id/stateSpinnerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_background"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerHeader">
+
+                <Spinner
+                    android:id="@+id/stateSpinner"
+                    style="@style/SpinnerStyle"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/pinCodeEdtTxt"
+                style="@style/EditTextStyleAddressPage"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/address_page_edt_hint_pin_code"
+                android:maxLength="6"
+                android:inputType="number"
+                android:layout_height="50dp"
+                android:text="@={addressViewModel.pincode}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:drawableLeft="@drawable/business_24"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/button_background"
+                android:text="Submit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/btnSubmit"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

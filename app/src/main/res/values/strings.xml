@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">NeoSoftTask</string>
+
+    <!--REGISTER ACTIVITY-->
+    <string name="register_page_header">Register</string>
+    <string name="register_page_edt_title_first_name">First Name *</string>
+    <string name="register_page_edt_hint_first_name">Enter your first name here</string>
+    <string name="register_page_edt_title_last_name">Last Name *</string>
+    <string name="register_page_edt_hint_last_name">Enter your last name here</string>
+    <string name="register_page_edt_title_phone_number">Phone Number *</string>
+    <string name="register_page_edt_hint_phone_number">Enter your 10 digit phone number</string>
+    <string name="register_page_edt_title_email_id">Email *</string>
+    <string name="register_page_edt_hint_email_id">Your email goes here</string>
+    <string name="register_page_edt_title_password">Password *</string>
+    <string name="register_page_edt_hint_password">Password</string>
+    <string name="register_page_edt_title_confirm_password">Confirm Password *</string>
+    <string name="register_page_edt_hint_confirm_password">Password</string>
+    <string name="register_page_radio_btn_title_gender">Gender *</string>
+    <string name="register_page_radio_btn_category_gender_male">Male</string>
+    <string name="register_page_radio_btn_category_gender_female">Female</string>
+
+    <!--INFO ACTIVITY-->
+    <string name="info_page_header">Your Info</string>
+    <string name="info_page_sub_header_education_info">Educational Info</string>
+    <string name="info_page_spinner_title_education">Education *</string>
+    <string name="info_page_spinner_hint_education">Select your Qualification</string>
+    <string name="info_page_spinner_title_year_of_passing">Year of Passing *</string>
+    <string name="info_page_spinner_hint_year_of_passing">Select Year of Passing</string>
+    <string name="info_page_edt_title_grade">Grade *</string>
+    <string name="info_page_edt_hint_grade">Enter your Grade or Percentage</string>
+    <string name="info_page_sub_header_professional_info">Professional Info</string>
+    <string name="info_page_edt_title_experience">Experience</string>
+    <string name="info_page_edt_hint_experience">Enter the years of experience</string>
+    <string name="info_page_spinner_title_designation">Designation *</string>
+    <string name="info_page_spinner_hint_designation">Select your Designation</string>
+    <string name="info_page_spinner_title_domain">Domain *</string>
+    <string name="info_page_spinner_hint_domain">Select your Domain</string>
+
+    <!--YOUR ADDRESS ACTIVITY-->
+    <string name="address_page_header">Your Address</string>
+    <string name="address_page_edt_hint_address">Address</string>
+    <string name="address_page_edt_hint_landmark">Landmark</string>
+    <string name="address_page_edt_hint_city">City</string>
+    <string name="address_page_edt_hint_state">State</string>
+    <string name="address_page_edt_hint_pin_code">Pin Code</string>
+
+    <string name="button_next">Next</string>
+    <string name="button_submit">Next</string>
+    <string name="button_previous">Previous</string>
+</resources>
