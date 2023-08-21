@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="infoViewModel"
+            type="com.example.neosofttask.view_model.YourInfoViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:context=".ui.MainActivity2">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/navigate_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvHeader"
+                style="@style/TextViewHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info_page_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/layoutLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+<!--                app:layout_constraintTop_toBottomOf="@+id/tvHeader">-->
+
+                <TextView
+                    android:id="@+id/tvHeader1"
+                    style="@style/TextViewSubHeader"
+                    android:text="@string/info_page_sub_header_education_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
+
+                <TextView
+                    android:id="@+id/spinnerHeader"
+                    style="@style/EditTextHeader"
+                    android:text="@string/info_page_spinner_title_education"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHeader1" />
+
+                <RelativeLayout
+                    android:id="@+id/educationSpinnerLayout"
+                    style="@style/SpinnerLayoutStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerHeader">
+
+                    <Spinner
+                        android:id="@+id/educationSpinner"
+                        style="@style/SpinnerStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/spinnerHeader1"
+                    style="@style/EditTextHeader"
+                    android:text="@string/info_page_spinner_title_year_of_passing"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/educationSpinnerLayout" />
+
+                <RelativeLayout
+                    android:id="@+id/yearOfPassSpinnerLayout"
+                    style="@style/SpinnerLayoutStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerHeader1">
+
+                    <Spinner
+                        android:id="@+id/passYearSpinner"
+                        style="@style/SpinnerStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/edtTxtHeaderGrade"
+                    style="@style/EditTextHeader"
+                    android:text="@string/info_page_edt_title_grade"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yearOfPassSpinnerLayout" />
+
+                <EditText
+                    android:id="@+id/edtTxtGrade"
+                    style="@style/EditTextStyleCustomInputType"
+                    android:hint="@string/info_page_edt_hint_grade"
+                    android:inputType="text"
+                    android:text="@={infoViewModel.grade}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderGrade" />
+
+                <TextView
+                    android:id="@+id/tvHeader2"
+                    style="@style/TextViewSubHeader"
+                    android:text="@string/info_page_sub_header_professional_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtGrade" />
+
+                <TextView
+                    android:id="@+id/edtTxtHeaderExperience"
+                    style="@style/EditTextHeader"
+                    android:text="@string/info_page_edt_title_experience"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHeader2" />
+
+                <EditText
+                    android:id="@+id/edtTxtExperience"
+                    style="@style/EditTextStyleCustomInputType"
+                    android:hint="@string/info_page_edt_hint_experience"
+                    android:inputType="number"
+                    android:text="@={infoViewModel.experience}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderExperience" />
+
+                <TextView
+                    android:id="@+id/spinnerHeader3"
+                    style="@style/EditTextHeader"
+                    android:text="@string/info_page_spinner_title_designation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtExperience" />
+
+                <RelativeLayout
+                    android:id="@+id/designationSpinnerLayout"
+                    style="@style/SpinnerLayoutStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerHeader3">
+
+                    <Spinner
+                        android:id="@+id/designationSpinner"
+                        style="@style/SpinnerStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/spinnerHeader4"
+                    style="@style/EditTextHeader"
+                    android:text="@string/info_page_spinner_title_domain"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/designationSpinnerLayout" />
+
+                <RelativeLayout
+                    android:id="@+id/domainSpinnerLayout"
+                    style="@style/SpinnerLayoutStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerHeader4">
+
+                    <Spinner
+                        android:id="@+id/domainSpinner"
+                        style="@style/SpinnerStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                app:elevation="0dp"
+                android:id="@+id/btnPrevious"
+                android:layout_width="0dp"
+                app:cornerRadius="0dp"
+                app:backgroundTint="@color/white"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/button_previous"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@+id/btnNext"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutLinear"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:cornerRadius="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/button_next"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/btnPrevious"
+                app:layout_constraintTop_toBottomOf="@+id/layoutLinear" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

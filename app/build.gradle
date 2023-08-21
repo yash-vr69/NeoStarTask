@@ -47,13 +47,19 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'androidx.test:core-ktx:1.4.0'
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
+    implementation 'androidx.test:runner:1.4.0'
     //Room Database
     def room_version = "2.5.2"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+    // Room Testing
+    testImplementation "androidx.room:room-testing:$room_version"
     //Unit Testing libraries
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     def lifecycle_version = "2.6.1"

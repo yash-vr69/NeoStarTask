@@ -1,10 +1,10 @@
 package com.example.neosofttask.view_model
 
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.neosofttask.utils.Validator
 import com.example.neosofttask.utils.Constants
 import com.example.neosofttask.model.UsersData
 import com.example.neosofttask.repository.UsersRepository
@@ -14,7 +14,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(private val usersRepository: UsersRepository) :
+class RegisterViewModel @Inject constructor(private val usersRepository: UsersRepository) :
     ViewModel() {
 
     val firstName = MutableLiveData<String>()
@@ -53,7 +53,94 @@ class MainActivityViewModel @Inject constructor(private val usersRepository: Use
     val actionDataForView: LiveData<Long> get() = _actionData
 
     fun validate() {
-        if (firstName.value.isNullOrEmpty()) {
+
+        if(!Validator.validateName(firstName.value).equals(Constants.successMsg)){
+            _errorMsgFirstName.value = Validator.validateName(firstName.value)
+        }
+        else if(!Validator.validateName(lastName.value).equals(Constants.successMsg)){
+            _errorMsgLastName.value = Validator.validateName(lastName.value)
+        }
+        else if(!Validator.validatePhone(phoneNumber.value).equals(Constants.successMsg)){
+            _errorMsgPhoneNumber.value = Validator.validatePhone(phoneNumber.value)
+        }
+        else if(!Validator.validateEmailId(emailId.value).equals(Constants.successMsg)){
+            _errorMsgEmail.value = Validator.validateEmailId(emailId.value)
+        }
+        else if(!Validator.validateGender(gender.value).equals(Constants.successMsg)){
+            _errorMsgGender.value = Validator.validateGender(gender.value)
+        }
+        else if(!Validator.validatePassword(password.value).equals(Constants.successMsg)){
+            _errorMsgPassword.value = Validator.validatePassword(password.value)
+        }
+        else if(!Validator.validateConfirmPassword(password.value,confirmPassword.value).equals(Constants.successMsg)){
+            _errorMsgConfirmPassword.value = Validator.validateConfirmPassword(password.value,confirmPassword.value)
+        }else{
+
+            viewModelScope.launch {
+                usersData = UsersData(
+                    firstName.value.toString(),
+                    lastName.value.toString(),
+                    phoneNumber.value.toString(),
+                    emailId.value.toString(),
+                    gender.value.toString(),
+                    password.value.toString(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null)
+
+                uniqueId = usersRepository.insertRegistrationDetails(usersData)
+                _actionData.value = uniqueId
+
+            }
+
+        }
+
+//        _errorMsgFirstName.value = Validator.validateName(firstName.value)
+//        _errorMsgLastName.value = Validator.validateName(lastName.value)
+//        _errorMsgPhoneNumber.value = Validator.validatePhone(phoneNumber.value)
+//        _errorMsgEmail.value = Validator.validateEmailId(emailId.value)
+//        _errorMsgGender.value = Validator.validateGender(gender.value)
+//        _errorMsgPassword.value = Validator.validatePassword(password.value)
+//        _errorMsgConfirmPassword.value = Validator.validateConfirmPassword(password.value,confirmPassword.value)
+
+//        if(_errorMsgFirstName.value?.equals(Constants.successMsg) == true && _errorMsgLastName.value?.equals(Constants.successMsg) == true && _errorMsgPhoneNumber.value?.equals(Constants.successMsg) == true
+//            && _errorMsgEmail.value?.equals(Constants.successMsg) == true && _errorMsgGender.value?.equals(Constants.successMsg) == true && _errorMsgPassword.value?.equals(Constants.successMsg) == true
+//            && _errorMsgConfirmPassword.value?.equals(Constants.successMsg) == true){
+//
+//            viewModelScope.launch {
+//                usersData = UsersData(
+//                    firstName.value.toString(),
+//                    lastName.value.toString(),
+//                    phoneNumber.value.toString(),
+//                    emailId.value.toString(),
+//                    gender.value.toString(),
+//                    password.value.toString(),
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    null)
+//
+//                uniqueId = usersRepository.insertRegistrationDetails(usersData)
+//                _actionData.value = uniqueId
+//
+//        }
+
+        /*if (firstName.value.isNullOrEmpty()) {
             _errorMsgFirstName.value = Constants.emptyStringErrorMessage
         }else if (firstName.value?.length?.compareTo(3) == -1) {
             _errorMsgFirstName.value = Constants.charLessThan3ErrorMessage
@@ -104,19 +191,8 @@ class MainActivityViewModel @Inject constructor(private val usersRepository: Use
                 uniqueId = usersRepository.insertRegistrationDetails(usersData)
                 _actionData.value = uniqueId
             }
-        }
+        }*/
     }
 
-    private fun emailValidator(usersEmail: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(usersEmail).matches()
-
-    private fun passwordValidator(password: String): Boolean {
-        if (password.length < 8) return false
-        if (password.filter { it.isDigit() }.firstOrNull() == null) return false
-        if (password.filter { it.isLetter() }.filter { it.isUpperCase() }
-                .firstOrNull() == null) return false
-        if (password.filter { it.isLetter() }.filter { it.isLowerCase() }
-                .firstOrNull() == null) return false
-        if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
-        return true
-    }
 }
+//    }

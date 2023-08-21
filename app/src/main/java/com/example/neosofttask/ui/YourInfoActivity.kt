@@ -9,33 +9,32 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.neosofttask.utils.Education
-import com.example.neosofttask.view_model.MainActivity2ViewModel
+import com.example.neosofttask.view_model.YourInfoViewModel
 import com.example.neosofttask.R
-import com.example.neosofttask.databinding.ActivityMain2Binding
+import com.example.neosofttask.databinding.ActivityYourInfoBinding
+import com.example.neosofttask.utils.Designation
+import com.example.neosofttask.utils.Domain
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity2 : AppCompatActivity() {
+class YourInfoActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMain2Binding
-    private lateinit var viewModel: MainActivity2ViewModel
-    private val yearOfPassingList = arrayOf("Select","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010")
-    private val designationList = arrayOf("Select","Technical Consultant","Android Developer","Jr Android Developer","Senior Android Developer","Android Team Lead","Android Project Manager")
-    private val domainList = arrayOf("Select","Application Scripting.","Array Programming","Artificial-Intelligence Reasoning","Cloud Computing","Computational Statistics","E-Commerce")
+    private lateinit var binding: ActivityYourInfoBinding
+    private lateinit var viewModel: YourInfoViewModel
+    private val yearOfPassingList = arrayOf("SELECT","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010")
     private var uniqueId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
 
         val intentData = intent
         uniqueId = intentData.getStringExtra("uniqueId")
 
-        binding = DataBindingUtil.setContentView(this@MainActivity2, R.layout.activity_main2)
-        viewModel = ViewModelProvider(this@MainActivity2)[MainActivity2ViewModel::class.java]
+        binding = DataBindingUtil.setContentView(this@YourInfoActivity, R.layout.activity_your_info)
+        viewModel = ViewModelProvider(this@YourInfoActivity)[YourInfoViewModel::class.java]
         binding.apply {
 
-            lifecycleOwner = this@MainActivity2
+            lifecycleOwner = this@YourInfoActivity
             infoViewModel = viewModel
             executePendingBindings()
         }
@@ -50,6 +49,7 @@ class MainActivity2 : AppCompatActivity() {
             btnNext.setOnClickListener {
                 getValuesFromSpinner()
                 viewModel.validate(uniqueId!!)
+//                viewModel.validate("1")
             }
 
             btnPrevious.setOnClickListener {
@@ -90,7 +90,7 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         viewModel.actionDataForView.observe(this, Observer {
-            startActivity(Intent(this, MainActivity3::class.java).apply {
+            startActivity(Intent(this, AddressActivity::class.java).apply {
                 putExtra("uniqueId", it.toString())
             })
         })
@@ -110,18 +110,18 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun setUp(){
-        val educationAdapter = ArrayAdapter(this@MainActivity2, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-            Education.list()
+        val educationAdapter = ArrayAdapter(this@YourInfoActivity, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            Education.values()
         )
         binding.educationSpinner.adapter = educationAdapter
 
-        val yearOfPassingAdapter = ArrayAdapter(this@MainActivity2, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, yearOfPassingList)
+        val yearOfPassingAdapter = ArrayAdapter(this@YourInfoActivity, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, yearOfPassingList)
         binding.passYearSpinner.adapter = yearOfPassingAdapter
 
-        val designationAdapter = ArrayAdapter(this@MainActivity2, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, designationList)
+        val designationAdapter = ArrayAdapter(this@YourInfoActivity, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, Designation.values())
         binding.designationSpinner.adapter = designationAdapter
 
-        val domainAdapter = ArrayAdapter(this@MainActivity2, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, domainList)
+        val domainAdapter = ArrayAdapter(this@YourInfoActivity, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, Domain.values())
         binding.domainSpinner.adapter = domainAdapter
     }
 }

@@ -24,5 +24,4 @@ class UsersRepository @Inject constructor(private val database: AppDatabase) {
                                   pinCode:String,
                                   uniqueId: String) = database.usersDao().updateAddressDetails(address,
         landmark,city,state,pinCode,uniqueId)
-
 }

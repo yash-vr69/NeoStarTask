@@ -1,17 +1,18 @@
 package com.example.neosofttask.utils
 
 enum class Education {
-    Select,
-    Post_Graduation,
-    Graduation,
-    HSC,
-    Diploma,
-    SSC;
+    SELECT,
+    PRIMARY_SCHOOL,
+    SECONDARY_SCHOOL,
+    HIGH_SCHOOL,
+    INTERMEDIATE,
+    DIPLOMA,
+    BACHELOR,
+    MASTER,
+    DOCTORATE,
+    POST_DOCTORATE;
 
-    companion object {
-        fun list(): ArrayList<Education> {
-            return arrayListOf(Select, Post_Graduation, Graduation, HSC, Diploma, SSC)
-        }
+    override fun toString(): String {
+        return name.replace('_', ' ')
     }
-
 }

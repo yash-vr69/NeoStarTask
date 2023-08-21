@@ -23,18 +23,18 @@
     <string name="info_page_header">Your Info</string>
     <string name="info_page_sub_header_education_info">Educational Info</string>
     <string name="info_page_spinner_title_education">Education *</string>
-    <string name="info_page_spinner_hint_education">Select your Qualification</string>
+    <string name="info_page_spinner_hint_education">Select your qualification</string>
     <string name="info_page_spinner_title_year_of_passing">Year of Passing *</string>
-    <string name="info_page_spinner_hint_year_of_passing">Select Year of Passing</string>
+    <string name="info_page_spinner_hint_year_of_passing">Select year of passing</string>
     <string name="info_page_edt_title_grade">Grade *</string>
-    <string name="info_page_edt_hint_grade">Enter your Grade or Percentage</string>
+    <string name="info_page_edt_hint_grade">Enter your grade or percentage</string>
     <string name="info_page_sub_header_professional_info">Professional Info</string>
     <string name="info_page_edt_title_experience">Experience</string>
     <string name="info_page_edt_hint_experience">Enter the years of experience</string>
     <string name="info_page_spinner_title_designation">Designation *</string>
-    <string name="info_page_spinner_hint_designation">Select your Designation</string>
+    <string name="info_page_spinner_hint_designation">Select your designation</string>
     <string name="info_page_spinner_title_domain">Domain *</string>
-    <string name="info_page_spinner_hint_domain">Select your Domain</string>
+    <string name="info_page_spinner_hint_domain">Select your domain</string>
 
     <!--YOUR ADDRESS ACTIVITY-->
     <string name="address_page_header">Your Address</string>

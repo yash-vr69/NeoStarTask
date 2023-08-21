@@ -7,13 +7,13 @@
     <data>
         <variable
             name="mainViewModel"
-            type="com.example.neosofttask.view_model.MainActivityViewModel" />
+            type="com.example.neosofttask.view_model.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.RegisterActivity">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -83,7 +83,8 @@
                     android:drawableLeft="@drawable/icon_person"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderFirstName" />
+                    app:layout_constraintTop_toBottomOf="@+id/edtTxtHeaderFirstName"/>
+<!--                    app:error="@{mainViewModel.firstNameErroMsg}"/>-->
 
                 <TextView
                     android:id="@+id/edtTxtHeaderLastName"
@@ -203,7 +204,7 @@
                     android:id="@+id/showPassword"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@drawable/hide_password"
+                    android:background="@drawable/pass2"
                     app:layout_constraintTop_toTopOf="@id/edtTxtPassword"
                     app:layout_constraintBottom_toBottomOf="@id/edtTxtPassword"
                     app:layout_constraintEnd_toEndOf="@id/edtTxtPassword"
@@ -213,15 +214,12 @@
                     android:id="@+id/hidePassword"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@drawable/view_password"
+                    android:background="@drawable/pass"
                     app:layout_constraintTop_toTopOf="@id/edtTxtPassword"
                     app:layout_constraintBottom_toBottomOf="@id/edtTxtPassword"
                     app:layout_constraintEnd_toEndOf="@id/edtTxtPassword"
                     android:layout_marginRight="5dp"
                     android:visibility="gone"/>
-
-<!--                    android:drawableEnd="@drawable/hide_password"/>-->
-                <!--                    app:error="@{String.valueOf(mainViewModel.passwordErroMsg)}"/>-->
 
                 <TextView
                     android:id="@+id/tvEdtTxtHeaderConfirmPass"

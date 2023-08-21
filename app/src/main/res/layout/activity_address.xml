@@ -7,13 +7,13 @@
     <data>
         <variable
             name="addressViewModel"
-            type="com.example.neosofttask.view_model.MainActivity3ViewModel" />
+            type="com.example.neosofttask.view_model.AddressViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity3">
+        tools:context=".ui.AddressActivity">
 
         <TextView
             android:id="@+id/tvHeader"

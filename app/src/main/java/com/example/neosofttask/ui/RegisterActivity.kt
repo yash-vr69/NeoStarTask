@@ -14,18 +14,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.neosofttask.view_model.MainActivityViewModel
+import com.example.neosofttask.view_model.RegisterViewModel
 import com.example.neosofttask.R
-import com.example.neosofttask.databinding.ActivityMainBinding
+import com.example.neosofttask.databinding.ActivityRegisterBinding
 import com.github.drjacky.imagepicker.ImagePicker
 import com.github.drjacky.imagepicker.constant.ImageProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var viewModel: RegisterViewModel
     private var mProfileUri: Uri? = null
 
     private val profileLauncher =
@@ -41,12 +41,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
-        viewModel = ViewModelProvider(this@MainActivity)[MainActivityViewModel::class.java]
+        binding = DataBindingUtil.setContentView(this@RegisterActivity, R.layout.activity_register)
+        viewModel = ViewModelProvider(this@RegisterActivity)[RegisterViewModel::class.java]
 
         binding.apply {
            mainViewModel = viewModel
-           lifecycleOwner = this@MainActivity
+           lifecycleOwner = this@RegisterActivity
            executePendingBindings()
         }
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
             tvProfilePic.setOnClickListener {
 
-                ImagePicker.with(this@MainActivity)
+                ImagePicker.with(this@RegisterActivity)
                     .crop()
                     .cropOval()
                     .maxResultSize(512, 512, true)
@@ -95,8 +95,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObservers(){
         viewModel.firstNameErroMsg.observe(this) {
-            binding.edtTxtFirstName.error = it
-            displayErrorToast(it)
+            if(! it.isNullOrEmpty()){
+//                if(it.equals(Consa))
+                binding.edtTxtFirstName.error = it
+                displayErrorToast(it)
+            }
         }
             viewModel.lastNameErroMsg.observe(this) {
             binding.edtTxtLastName.error = it
@@ -104,32 +107,32 @@ class MainActivity : AppCompatActivity() {
         }
             viewModel.phoneErroMsg.observe(this) {
             binding.edtTxtPhoneNo.error = it
-                displayErrorToast(it)
+            displayErrorToast(it)
         }
             viewModel.genderErroMsg.observe(this) {
-                displayErrorToast(it)
+            displayErrorToast(it)
         }
             viewModel.emailErroMsg.observe(this) {
             binding.edtTxtEmail.error = it
-                displayErrorToast(it)
+            displayErrorToast(it)
         }
             viewModel.passwordErroMsg.observe(this) {
             binding.edtTxtPassword.error = it
-                displayErrorToast(it)
+            displayErrorToast(it)
         }
             viewModel.confirmPassErroMsg.observe(this) {
             binding.edtTxtConfirmPass.error = it
-                displayErrorToast(it)
+            displayErrorToast(it)
         }
         viewModel.actionDataForView.observe(this) {
-            startActivity(Intent(this, MainActivity2::class.java).apply {
+            startActivity(Intent(this, YourInfoActivity::class.java).apply {
                 putExtra("uniqueId", it.toString())
             })
         }
     }
 
     private fun displayErrorToast(errorMessage: String){
-        Toast.makeText(this@MainActivity,errorMessage,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@RegisterActivity,errorMessage,Toast.LENGTH_SHORT).show()
     }
 }
 

@@ -1,14 +1,16 @@
 package com.example.neosofttask.room_db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.neosofttask.model.UsersData
 
 @Dao
 interface UsersDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRegistrationDetails(usersData: UsersData): Long
 
     @Query("UPDATE UsersData SET education = :education,yearofpassing = :yearOfPassing,grade =:grade,experience =:experience,designation =:designation,domain =:domain WHERE id =:uniqueId")
@@ -27,5 +29,8 @@ interface UsersDao {
                                   state: String,
                                   pinCode: String,
                                   uniqueId: String)
+
+    @Query("SELECT * FROM UsersData WHERE id =:uniqueId")
+    suspend fun getAllDetails(uniqueId: String): UsersData
 
 }
