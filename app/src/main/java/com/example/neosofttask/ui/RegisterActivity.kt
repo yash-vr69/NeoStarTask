@@ -14,12 +14,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.neosofttask.view_model.RegisterViewModel
 import com.example.neosofttask.R
 import com.example.neosofttask.databinding.ActivityRegisterBinding
 import com.github.drjacky.imagepicker.ImagePicker
 import com.github.drjacky.imagepicker.constant.ImageProvider
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
@@ -32,8 +36,8 @@ class RegisterActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 val uri = it.data?.data!!
-                mProfileUri = uri
-                binding.tvProfilePic.setImageURI(uri)
+//                mProfileUri = uri
+                viewModel.profilePic.value = uri
             }
         }
 
@@ -51,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         handleClickEvents()
+        collectErrors()
         setObservers()
         handleRadioButtonSelection()
     }
@@ -93,41 +98,66 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun setObservers(){
-        viewModel.firstNameErroMsg.observe(this) {
-            if(! it.isNullOrEmpty()){
-//                if(it.equals(Consa))
+    private fun setObservers() {
+        viewModel.actionDataForView.observe(this@RegisterActivity) {
+            startActivity(Intent(this, YourInfoActivity::class.java).apply {
+                putExtra("uniqueId", it.toString())
+            })
+        }
+
+        viewModel.profilePic.observe(this@RegisterActivity){
+            binding.tvProfilePic.setImageURI(it)
+        }
+
+    }
+
+    private fun collectErrors() = lifecycleScope.launch{
+        launch {
+            viewModel.firstNameErrorMsg.collect {
                 binding.edtTxtFirstName.error = it
                 displayErrorToast(it)
             }
         }
-            viewModel.lastNameErroMsg.observe(this) {
-            binding.edtTxtLastName.error = it
-            displayErrorToast(it)
+
+        launch{
+            viewModel.lastNameErroMsg.collect {
+                binding.edtTxtLastName.error = it
+                displayErrorToast(it)
+            }
         }
-            viewModel.phoneErroMsg.observe(this) {
-            binding.edtTxtPhoneNo.error = it
-            displayErrorToast(it)
+
+        launch{
+            viewModel.phoneErroMsg.collect {
+                binding.edtTxtPhoneNo.error = it
+                displayErrorToast(it)
+            }
         }
-            viewModel.genderErroMsg.observe(this) {
-            displayErrorToast(it)
+
+        launch{
+            viewModel.genderErroMsg.collect {
+                displayErrorToast(it)
+            }
         }
-            viewModel.emailErroMsg.observe(this) {
-            binding.edtTxtEmail.error = it
-            displayErrorToast(it)
+
+        launch {
+            viewModel.emailErroMsg.collect {
+                binding.edtTxtEmail.error = it
+                displayErrorToast(it)
+            }
         }
-            viewModel.passwordErroMsg.observe(this) {
-            binding.edtTxtPassword.error = it
-            displayErrorToast(it)
+
+        launch{
+            viewModel.passwordErroMsg.collect {
+                binding.edtTxtPassword.error = it
+                displayErrorToast(it)
+            }
         }
-            viewModel.confirmPassErroMsg.observe(this) {
-            binding.edtTxtConfirmPass.error = it
-            displayErrorToast(it)
-        }
-        viewModel.actionDataForView.observe(this) {
-            startActivity(Intent(this, YourInfoActivity::class.java).apply {
-                putExtra("uniqueId", it.toString())
-            })
+
+        launch{
+            viewModel.confirmPassErroMsg.collect {
+                binding.edtTxtConfirmPass.error = it
+                displayErrorToast(it)
+            }
         }
     }
 

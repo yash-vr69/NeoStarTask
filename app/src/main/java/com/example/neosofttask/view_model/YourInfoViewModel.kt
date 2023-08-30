@@ -8,6 +8,7 @@ import com.example.neosofttask.utils.Constants
 import com.example.neosofttask.repository.UsersRepository
 import com.example.neosofttask.utils.Validator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,46 +22,46 @@ class YourInfoViewModel @Inject constructor(private val usersRepository: UsersRe
     val designation = MutableLiveData<String>()
     val domain = MutableLiveData<String>()
 
-    private val _errorMsgEducation = MutableLiveData<String>()
-    val educationErroMsg: LiveData<String> get() = _errorMsgEducation
+    private val _errorMsgEducation = MutableSharedFlow<String>()
+    val educationErroMsg = _errorMsgEducation
 
-    private val _errorMsgYearOfPassing = MutableLiveData<String>()
-    val yearOfPassingErroMsg: LiveData<String> get() = _errorMsgYearOfPassing
+    private val _errorMsgYearOfPassing = MutableSharedFlow<String>()
+    val yearOfPassingErroMsg = _errorMsgYearOfPassing
 
-    private val _errorMsgGrade = MutableLiveData<String>()
-    val gradeErroMsg: LiveData<String> get() = _errorMsgGrade
+    private val _errorMsgGrade = MutableSharedFlow<String>()
+    val gradeErroMsg = _errorMsgGrade
 
-    private val _errorMsgExperience = MutableLiveData<String>()
-    val experienceErroMsg: LiveData<String> get() = _errorMsgExperience
+    private val _errorMsgExperience = MutableSharedFlow<String>()
+    val experienceErroMsg = _errorMsgExperience
 
-    private val _errorMsgDesignation = MutableLiveData<String>()
-    val designationErroMsg: LiveData<String> get() = _errorMsgDesignation
+    private val _errorMsgDesignation = MutableSharedFlow<String>()
+    val designationErroMsg = _errorMsgDesignation
 
-    private val _errorMsgDomain = MutableLiveData<String>()
-    val domainErroMsg: LiveData<String> get() = _errorMsgDomain
+    private val _errorMsgDomain = MutableSharedFlow<String>()
+    val domainErroMsg = _errorMsgDomain
 
     private val _actionData = MutableLiveData<String>()
     val actionDataForView: LiveData<String> get() = _actionData
 
-    fun validate(uniqueId: String){
+    fun validate(uniqueId: String) = viewModelScope.launch{
 
         if(!Validator.validateEducation(education.value.toString()).equals(Constants.successMsg)){
-            _errorMsgEducation.value = Validator.validateEducation(education.value.toString())
+            _errorMsgEducation.emit(Validator.validateEducation(education.value.toString()))
         }
         else if(!Validator.validateYearOfPassing(yearOfPassing.value.toString()).equals(Constants.successMsg)){
-            _errorMsgYearOfPassing.value = Validator.validateYearOfPassing(yearOfPassing.value.toString())
+            _errorMsgYearOfPassing.emit(Validator.validateYearOfPassing(yearOfPassing.value.toString()))
         }
         else if(!Validator.validateGrade(grade.value).equals(Constants.successMsg)){
-            _errorMsgGrade.value = Validator.validateGrade(grade.value.toString())
+            _errorMsgGrade.emit(Validator.validateGrade(grade.value))
         }
         else if(!Validator.validateExperience(experience.value).equals(Constants.successMsg)){
-            _errorMsgExperience.value = Validator.validateExperience(experience.value.toString())
+            _errorMsgExperience.emit(Validator.validateExperience(experience.value))
         }
         else if(!Validator.validateDesignation(designation.value.toString()).equals(Constants.successMsg)){
-            _errorMsgDesignation.value = Validator.validateDesignation(designation.value.toString())
+            _errorMsgDesignation.emit(Validator.validateDesignation(designation.value.toString()))
         }
         else if(!Validator.validateDomain(domain.value.toString()).equals(Constants.successMsg)){
-            _errorMsgDomain.value = Validator.validateDomain(domain.value.toString())
+            _errorMsgDomain.emit(Validator.validateDomain(domain.value.toString()))
         }
         else{
             viewModelScope.launch {

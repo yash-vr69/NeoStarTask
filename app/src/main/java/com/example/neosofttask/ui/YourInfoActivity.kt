@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.neosofttask.utils.Education
 import com.example.neosofttask.view_model.YourInfoViewModel
 import com.example.neosofttask.R
@@ -15,6 +16,7 @@ import com.example.neosofttask.databinding.ActivityYourInfoBinding
 import com.example.neosofttask.utils.Designation
 import com.example.neosofttask.utils.Domain
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class YourInfoActivity : AppCompatActivity() {
@@ -40,6 +42,7 @@ class YourInfoActivity : AppCompatActivity() {
         }
 
         handleClickEvents()
+        collectErrors()
         setUpObservers()
         setUp()
     }
@@ -49,7 +52,6 @@ class YourInfoActivity : AppCompatActivity() {
             btnNext.setOnClickListener {
                 getValuesFromSpinner()
                 viewModel.validate(uniqueId!!)
-//                viewModel.validate("1")
             }
 
             btnPrevious.setOnClickListener {
@@ -62,33 +64,48 @@ class YourInfoActivity : AppCompatActivity() {
         }
     }
 
+    private fun collectErrors() = lifecycleScope.launch{
+
+        launch {
+            viewModel.educationErroMsg.collect {
+                displayError(it)
+            }
+        }
+
+        launch{
+            viewModel.yearOfPassingErroMsg.collect {
+                displayError(it)
+            }
+        }
+
+        launch {
+            viewModel.gradeErroMsg.collect {
+                binding.edtTxtGrade.error = it
+                displayError(it)
+            }
+        }
+
+        launch{
+            viewModel.experienceErroMsg.collect {
+                binding.edtTxtExperience.error = it
+                displayError(it)
+            }
+        }
+
+        launch {
+            viewModel.designationErroMsg.collect {
+                displayError(it)
+            }
+        }
+
+        launch {
+            viewModel.domainErroMsg.collect {
+                displayError(it)
+            }
+        }
+    }
+
     private fun setUpObservers(){
-        viewModel.educationErroMsg.observe(this) {
-            displayError(it)
-        }
-
-        viewModel.yearOfPassingErroMsg.observe(this) {
-            displayError(it)
-        }
-
-        viewModel.gradeErroMsg.observe(this) {
-            binding.edtTxtGrade.error = it
-            displayError(it)
-        }
-
-        viewModel.experienceErroMsg.observe(this) {
-            binding.edtTxtExperience.error = it
-            displayError(it)
-        }
-
-        viewModel.designationErroMsg.observe(this) {
-            displayError(it)
-        }
-
-        viewModel.domainErroMsg.observe(this) {
-            displayError(it)
-        }
-
         viewModel.actionDataForView.observe(this, Observer {
             startActivity(Intent(this, AddressActivity::class.java).apply {
                 putExtra("uniqueId", it.toString())
